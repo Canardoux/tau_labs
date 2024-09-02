@@ -1,40 +1,48 @@
 PODS:
   - Flutter (1.0.0)
-  - lab_sound_flutter (0.0.1):
+  - lab_sound_bridge (0.0.10)
+  - lab_sound_flutter (0.0.10):
     - Flutter
-  - open_file (0.0.1):
+    - lab_sound_bridge (= 0.0.10)
+  - open_file_ios (0.0.1):
     - Flutter
-  - path_provider_ios (0.0.1):
+  - path_provider_foundation (0.0.1):
     - Flutter
-  - "permission_handler (5.1.0+2)":
+    - FlutterMacOS
+  - permission_handler_apple (9.3.0):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - lab_sound_flutter (from `.symlinks/plugins/lab_sound_flutter/ios`)
-  - open_file (from `.symlinks/plugins/open_file/ios`)
-  - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - open_file_ios (from `.symlinks/plugins/open_file_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+
+SPEC REPOS:
+  trunk:
+    - lab_sound_bridge
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   lab_sound_flutter:
     :path: ".symlinks/plugins/lab_sound_flutter/ios"
-  open_file:
-    :path: ".symlinks/plugins/open_file/ios"
-  path_provider_ios:
-    :path: ".symlinks/plugins/path_provider_ios/ios"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
+  open_file_ios:
+    :path: ".symlinks/plugins/open_file_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  lab_sound_flutter: 07dc04c207408d8115eca3ca06cf5caa02ef0b76
-  open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
-  path_provider_ios: 7d7ce634493af4477d156294792024ec3485acd5
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  lab_sound_bridge: bc4f7d1574d5e78f1e5789f7d0f784ef559d825f
+  lab_sound_flutter: 0c90f1af68ffcec345dccc02f8f665ca60536794
+  open_file_ios: 461db5853723763573e140de3193656f91990d9e
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 7d65c34c53bf256360089e190021753ea2c6c54e
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.2

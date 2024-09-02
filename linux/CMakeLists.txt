@@ -1,39 +1,22 @@
+# The Flutter tooling requires that developers have CMake 3.10 or later
+# installed. You should not increase this version, as doing so will cause
+# the plugin to fail to compile for some customers of the plugin.
 cmake_minimum_required(VERSION 3.10)
+
+# Project-level configuration.
 set(PROJECT_NAME "lab_sound_flutter")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-# This value is used when generating builds using this plugin, so it must
-# not be changed
-set(PLUGIN_NAME "lab_sound_flutter_plugin")
+# Invoke the build for native code shared with the other target platforms.
+# This can be changed to accommodate different builds.
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../src" "${CMAKE_CURRENT_BINARY_DIR}/shared")
 
-add_library(${PLUGIN_NAME} SHARED
-  "lab_sound_flutter_plugin.cc"
-)
-apply_standard_settings(${PLUGIN_NAME})
-set_target_properties(${PLUGIN_NAME} PROPERTIES
-  CXX_VISIBILITY_PRESET hidden)
-target_compile_definitions(${PLUGIN_NAME} PRIVATE FLUTTER_PLUGIN_IMPL)
-target_include_directories(${PLUGIN_NAME} INTERFACE
-  "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(${PLUGIN_NAME} PRIVATE flutter)
-target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
-
-add_compile_options(-fPIC)
-
-# List of absolute paths to libraries that should be bundled with the plugin
+# List of absolute paths to libraries that should be bundled with the plugin.
+# This list could contain prebuilt libraries, or libraries created by an
+# external build triggered from this build file.
 set(lab_sound_flutter_bundled_libraries
-  "./libLabSoundBridge.so"
+  # Defined in ../src/CMakeLists.txt.
+  # This can be changed to accommodate different builds.
+  $<TARGET_FILE:lab_sound_flutter>
   PARENT_SCOPE
 )
-
-#set(LABSOUND_PULSE 1)
-# set(LABSOUND_JACK 1)
-# set(LABSOUND_ASOUND 1)
-
-# add_subdirectory(../ LabSoundBridge)
-
-# backends/RtAudio/RtAudio.cpp:7806:10: fatal error: 'alsa/asoundlib.h' file not found
-# sudo apt-get install libasound2-dev
-
-# backends/RtAudio/RtAudio.cpp:9261:10: fatal error: 'pulse/error.h' file not found
-# sudo apt-get install libpulse-dev

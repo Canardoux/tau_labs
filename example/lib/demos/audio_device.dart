@@ -20,13 +20,14 @@ class AudioDeviceList extends StatelessWidget {
                       spacing: 4.0,
                           children: e.supportedSampleRates!
                               .map((sr) => Text(
-                                    "$sr",
+                                    "$sr",/*
                                     style: sr != e.nominalSampleRate
                                         ? Theme.of(context).textTheme.caption
                                         : Theme.of(context)
                                             .textTheme
                                             .caption!
                                             .copyWith(color: Colors.black),
+                                            */
                                   ))
                               .toList(),
                         ),
