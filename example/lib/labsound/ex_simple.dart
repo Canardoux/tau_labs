@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,9 +23,9 @@ List<AudioStreamConfig?> getDefaultAudioDeviceConfiguration(
   AudioDeviceInfo? defaultOutputInfo, defaultInputInfo;
 
   for (final info in audioDevices) {
-    if (info.index == defaultOutputDevice.index)
+    if (info.index == defaultOutputDevice.index) {
       defaultOutputInfo = info;
-    else if (info.index == defaultInputDevice.index) defaultInputInfo = info;
+    } else if (info.index == defaultInputDevice.index) defaultInputInfo = info;
   }
   if (defaultOutputInfo != null && defaultOutputInfo.index != -1) {
     outputConfig = AudioStreamConfig(
@@ -51,9 +51,9 @@ List<AudioStreamConfig?> getDefaultAudioDeviceConfiguration(
 
 Future<AudioBus> makeBusFromSampleFile(String path) async{
   final tempDir = await getTemporaryDirectory();
-  final file = File(tempDir.path + '/' + path);
+  final file = File('${tempDir.path}/$path');
   await file.writeAsBytes(
-      (await rootBundle.load('assets/' + path)).buffer.asUint8List());
+      (await rootBundle.load('assets/$path')).buffer.asUint8List());
   return await AudioBus.fromFile(file.path);
 }
 
@@ -149,7 +149,7 @@ class ExOscPop {
     context.removeAutomaticPullNode(recorder);
 
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/ex_osc_pop.wav');
+    final file = File('${tempDir.path}/ex_osc_pop.wav');
     if(file.existsSync()) file.deleteSync();
 
     recorder.writeRecordingToWav(file.path);
@@ -223,7 +223,7 @@ class ExOfflineRendering {
 
 
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/ex_osc_pop.wav');
+    final file = File('${tempDir.path}/ex_osc_pop.wav');
     if(file.existsSync()) file.deleteSync();
 
     recorder.writeRecordingToWav(file.path);
@@ -408,7 +408,7 @@ class ExMicrophone {
     context.removeAutomaticPullNode(recorder);
 
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/ExMicrophone.wav');
+    final file = File('${tempDir.path}/ExMicrophone.wav');
     if(file.existsSync()) file.deleteSync();
     recorder.writeRecordingToWav(file.path);
     final bus = recorder.createBusFromRecording();

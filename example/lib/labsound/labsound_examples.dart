@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 import 'ex_simple.dart';
 
 class LabSoundExamples extends StatelessWidget {
+  const LabSoundExamples({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

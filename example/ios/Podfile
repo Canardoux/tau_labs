@@ -45,5 +45,5 @@ end
 # =====================================================
 # The following instruction is only for Tau debugging.
 # Do not insert such a line in a real App.
-# pod 'tau_bridge', :path => '../../../tau_bridge/products/TauBridge.framework/TauBridge'
+#pod 'tau_bridge', :path => '../../../tau_bridge'
 # =====================================================

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
-import 'package:lab_sound_flutter_example/draw_frequency.dart';
+import 'package:tau_labs/tau_labs.dart';
+import 'package:tau_labs_example/draw_frequency.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Recorder extends StatefulWidget {
+  const Recorder({super.key});
+
 
   @override
   _RecorderState createState() => _RecorderState();
@@ -46,7 +48,7 @@ class _RecorderState extends State<Recorder> {
     audioContext.removeAutomaticPullNode(recorder);
 
     final tempDir = await getTemporaryDirectory();
-    final savePath = tempDir.path + '/test.wav';
+    final savePath = '${tempDir.path}/test.wav';
 
     recorder.writeRecordingToWav(savePath);
     print("savePath: $savePath ");
@@ -75,7 +77,7 @@ class _RecorderState extends State<Recorder> {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
-          if(analyser != null) Container(height: 300, child: DrawFrequency(analyser!)),
+          if(analyser != null) SizedBox(height: 300, child: DrawFrequency(analyser!)),
           ElevatedButton(
               child: Text("录音"),
               onPressed: () async {

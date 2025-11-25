@@ -1,4 +1,4 @@
-import 'package:lab_sound_flutter/src/lab_sound/delay_node.dart';
+import 'package:tau_labs/src/lab_sound/delay_node.dart';
 import 'audio_context.dart';
 import 'lab_sound.dart';
 

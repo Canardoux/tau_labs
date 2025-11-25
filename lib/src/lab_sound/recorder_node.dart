@@ -4,6 +4,9 @@ import 'audio_context.dart';
 import 'audio_node.dart';
 import 'audio_stream_config.dart';
 import 'lab_sound.dart';
+import '../extensions/ffi_string.dart';
+import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 
 class RecorderNode extends AudioNode {
   // todo: 有两个创建方法 一个是仅传递声道数量 一个是传递配置结构
@@ -21,6 +24,6 @@ class RecorderNode extends AudioNode {
   }
 
   bool writeRecordingToWav(String filenameWithWavExtension, {bool mixToMono = false}) {
-    return LabSound().RecorderNode_writeRecordingToWav(nodeId, filenameWithWavExtension.toInt8(), mixToMono ? 1 : 0) > 0;
+    return LabSound().RecorderNode_writeRecordingToWav(nodeId, filenameWithWavExtension.toInt8() as Pointer<Char>, mixToMono ? 1 : 0) > 0;
   }
 }

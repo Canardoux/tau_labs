@@ -3,15 +3,20 @@
 # the plugin to fail to compile for some customers of the plugin.
 cmake_minimum_required(VERSION 3.10)
 
-project(lab_sound_flutter_library VERSION 0.0.1 LANGUAGES C)
+project(tau_labs_library VERSION 0.0.1 LANGUAGES C)
 
-add_library(lab_sound_flutter SHARED
-  "lab_sound_flutter.c"
+add_library(tau_labs SHARED
+  "tau_labs.c"
 )
 
-set_target_properties(lab_sound_flutter PROPERTIES
-  PUBLIC_HEADER lab_sound_flutter.h
-  OUTPUT_NAME "lab_sound_flutter"
+set_target_properties(tau_labs PROPERTIES
+  PUBLIC_HEADER tau_labs.h
+  OUTPUT_NAME "tau_labs"
 )
 
-target_compile_definitions(lab_sound_flutter PUBLIC DART_SHARED_LIB)
+target_compile_definitions(tau_labs PUBLIC DART_SHARED_LIB)
+
+if (ANDROID)
+  # Support Android 15 16k page size
+  target_link_options(tau_labs PRIVATE "-Wl,-z,max-page-size=16384")
+endif()

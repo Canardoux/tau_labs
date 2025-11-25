@@ -7,7 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
-  lab_sound_flutter
+  tau_labs
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

@@ -68,7 +68,7 @@ class AnalyserBuffer<T> extends IterableBase<T> {
 
 }
 
-class _AnalyserBufferIterator<T> extends Iterator<T> {
+class _AnalyserBufferIterator<T> implements Iterator<T> {
   Pointer ptr;
   int size;
   _AnalyserBufferIterator(this.ptr, this.size);

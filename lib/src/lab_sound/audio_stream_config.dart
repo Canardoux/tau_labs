@@ -1,4 +1,4 @@
-import '../generated_bindings.dart' as bind;
+import '../../tau_labs_bindings_generated.dart' as bind;
 import 'lab_sound.dart';
 
 class AudioStreamConfig {

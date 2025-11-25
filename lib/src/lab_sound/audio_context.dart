@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:tau_labs/tau_labs.dart';
+//import 'package:rxdart/rxdart.dart';
 import '../extensions/ffi_string.dart';
 import 'recorder_node.dart';
 import 'audio_hardware_device_node.dart';
@@ -84,7 +84,7 @@ class AudioContext {
   }
 
   connectParamByName(AudioNode destinationNode, String parameterName, AudioNode driverNode, [int index = 0]) {
-    LabSound().AudioContext_connectParamByName(pointer, destinationNode.nodeId, parameterName.toInt8(), driverNode.nodeId, index);
+    LabSound().AudioContext_connectParamByName(pointer, destinationNode.nodeId, parameterName.toInt8() as Pointer<Char>, driverNode.nodeId, index);
   }
 
   disconnectParam(AudioParam param, AudioNode driverNode, [int index = 0]) {

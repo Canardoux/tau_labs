@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 class DrawTimeDomain extends StatefulWidget {
   final AnalyserNode analyserNode;
 
-  DrawTimeDomain(this.analyserNode, {Key? key}) : super(key: key);
+  const DrawTimeDomain(this.analyserNode, {super.key});
 
   @override
   _DrawTimeDomainState createState() => _DrawTimeDomainState();
@@ -53,12 +53,12 @@ class TimeDomainPainter extends CustomPainter {
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    double w = size.width / this.analyserNode.frequencyBinCount;
+    double w = size.width / analyserNode.frequencyBinCount;
     double h = size.height / 256.0;
     var path = Path();
     path.moveTo(0, h * 128);
     int n = 0;
-    this.analyserNode.getByteTimeDomainData().forEach((val) {
+    analyserNode.getByteTimeDomainData().forEach((val) {
       if (n == 0) {
         path.moveTo(0, h * val);
       } else {

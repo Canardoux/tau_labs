@@ -31,7 +31,7 @@ class AudioNode {
 
   List<AudioNode> linked = [];
 
-  String get name => (Pointer<Utf8>.fromAddress(LabSound().AudioNode_name(nodeId).address)).toStr();
+  String get name => (Pointer<Utf8>.fromAddress(LabSound().AudioNode_name(nodeId).address)).toDartString();
 
   bool get isScheduledNode => LabSound().AudioNode_isScheduledNode(nodeId) > 0;
 

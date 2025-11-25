@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
-import 'package:lab_sound_flutter/src/lab_sound/audio_channel.dart';
+import 'package:tau_labs/src/lab_sound/audio_channel.dart';
 import 'package:path/path.dart';
 import '../extensions/ffi_string.dart';
 import 'audio_node.dart';
@@ -27,7 +27,7 @@ class AudioBus {
     this.debugName,
     bool mixToMono = false,
     double targetSampleRate = 0.0
-  }): resourceId = LabSound().makeBusFromFile(filePath.toInt8(), mixToMono ? 1 : 0, targetSampleRate) {
+  }): resourceId = LabSound().makeBusFromFile(filePath.toInt8() as Pointer<Char>, mixToMono ? 1 : 0, targetSampleRate) {
     debugName ??= basename(filePath);
     Completer<AudioBus> _loadCompleter = Completer();
     complete = _loadCompleter.future;
@@ -43,7 +43,7 @@ class AudioBus {
     this.autoDispose = false,
     this.debugName,
     bool mixToMono = false,
-  }):filePath = '', resourceId = LabSound().makeBusFromMemory(bufferPtr, bufferLen, extension.toInt8(), mixToMono ? 1 : 0) {
+  }):filePath = '', resourceId = LabSound().makeBusFromMemory(bufferPtr, bufferLen, extension.toInt8() as Pointer<Char>, mixToMono ? 1 : 0) {
     debugName ??= basename(filePath);
     Completer<AudioBus> _loadCompleter = Completer();
     complete = _loadCompleter.future;

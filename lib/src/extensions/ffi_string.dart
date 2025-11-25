@@ -1,7 +1,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import '../generated_bindings.dart';
+import '../../tau_labs_bindings_generated.dart';
 import 'dart:convert';
 extension StringExtensions on String {
   Pointer<Int8> toInt8() {
@@ -23,7 +23,7 @@ extension PointerUtf8Extensions on Pointer<Utf8> {
 
 extension PointerInt8Extensions on Pointer<Int8> {
   String toStr({int? length}) {
-    return Pointer<Utf8>.fromAddress(this.address).toStr(length: length);
+    return Pointer<Utf8>.fromAddress(this.address).toDartString(length: length);
   }
 }
 
@@ -31,6 +31,7 @@ extension PointerInt16Extensions on Pointer<Int8> {
   String toStrUtf16() => Pointer<Utf16>.fromAddress(this.address).toDartString();
 }
 
+/* LARPOUX
 extension FloatArrayEx on FloatArray {
   List<double> toList() {
     final List<double> list = [];
@@ -45,6 +46,8 @@ extension CharArrayEx on CharArray {
   String toStr() {
     print("len: $len");
     if(len == 0) return "";
-    return Pointer<Utf8>.fromAddress(string.address).toStr(length: len);
+    return Pointer<Utf8>.fromAddress(string.address).toDartString(length: len);
   }
 }
+
+ */

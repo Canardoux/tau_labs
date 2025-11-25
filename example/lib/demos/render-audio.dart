@@ -1,13 +1,14 @@
 import 'dart:io';
-import 'package:lab_sound_flutter_example/demos/music-time.dart';
+import 'package:tau_labs_example/demos/music-time.dart';
 import 'package:open_file/open_file.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 import 'package:path_provider/path_provider.dart';
 
 class RenderAudioPage extends StatefulWidget {
+  const RenderAudioPage({super.key});
+
   @override
   _RenderAudioPageState createState() => _RenderAudioPageState();
 }
@@ -19,9 +20,9 @@ class _RenderAudioPageState extends State<RenderAudioPage> {
 
   Future<String> loadAsset(String path) async {
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/' + path);
+    final file = File('${tempDir.path}/$path');
     await file.writeAsBytes(
-        (await rootBundle.load('assets/' + path)).buffer.asUint8List());
+        (await rootBundle.load('assets/$path')).buffer.asUint8List());
     return file.path;
   }
 
@@ -68,7 +69,7 @@ class _RenderAudioPageState extends State<RenderAudioPage> {
                     audioSample.connect(dynamicsCompressorNode);
                     audioSample.schedule();
                     int i = 0;
-                    musicTime.forEach((time) {
+                    for (var time in musicTime) {
                       final high = i++ % 4 == 0;
                       oscillator.frequency
                           .setValueAtTime(high ? 1760.0 : 880.0, time / 1000);
@@ -76,7 +77,7 @@ class _RenderAudioPageState extends State<RenderAudioPage> {
                           .setValueAtTime(high ? 0.8 : 0.6, time / 1000);
                       oscillator.amplitude
                           .linearRampToValueAtTime(0.0, time / 1000 + 0.1);
-                    });
+                    }
 
                     audioContext.addAutomaticPullNode(recorder);
                     recorder.startRecording();
@@ -85,7 +86,7 @@ class _RenderAudioPageState extends State<RenderAudioPage> {
                     audioContext.removeAutomaticPullNode(recorder);
 
                     final tempDir = await getTemporaryDirectory();
-                    final savePath = tempDir.path + '/test.wav';
+                    final savePath = '${tempDir.path}/test.wav';
 
                     recorder.writeRecordingToWav(savePath);
                     print("savePath: $savePath ");

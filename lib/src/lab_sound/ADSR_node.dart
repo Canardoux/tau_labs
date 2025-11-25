@@ -1,4 +1,4 @@
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 import 'audio_param.dart';
 import 'audio_context.dart';

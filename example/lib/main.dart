@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
-import 'package:lab_sound_flutter_example/demos/dial.dart';
-import 'package:lab_sound_flutter_example/demos/recorder.dart';
-import 'package:lab_sound_flutter_example/demos/zelda.dart' as zelda;
+import 'package:tau_labs/tau_labs.dart';
+import 'package:tau_labs_example/demos/dial.dart';
+import 'package:tau_labs_example/demos/recorder.dart';
 
 import 'demos/audio_device.dart';
 import 'demos/render-audio.dart';
 import 'demos/wave_form.dart';
 import 'demos/zelda.dart';
-import 'labsound/ex_simple.dart';
 import 'labsound/labsound_examples.dart';
 
 void main() {
@@ -17,6 +15,8 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }

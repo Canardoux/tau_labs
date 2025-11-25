@@ -7,8 +7,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
-import 'package:lab_sound_flutter_example/draw_time_domain.dart';
+import 'package:tau_labs/tau_labs.dart';
+import 'package:tau_labs_example/draw_time_domain.dart';
 
 import 'zelda_data.dart';
 
@@ -24,7 +24,7 @@ final Map<String, int> noteToScaleIndex = {
 };
 
 double noteFrequency(String note) {
-  final RegExp noteRegExp = new RegExp(r"^([a-g](?:b|#|x|bb)?)(-?[0-9]+)", caseSensitive: false);
+  final RegExp noteRegExp = RegExp(r"^([a-g](?:b|#|x|bb)?)(-?[0-9]+)", caseSensitive: false);
   final match = noteRegExp.firstMatch(note);
   if(match != null) {
     final index = noteToScaleIndex[(match[1] ?? '').toLowerCase()]!;
@@ -37,6 +37,8 @@ double noteFrequency(String note) {
 
 
 class Zelda extends StatefulWidget {
+  const Zelda({super.key});
+
   @override
   _ZeldaState createState() => _ZeldaState();
 }
@@ -122,10 +124,10 @@ class _ZeldaState extends State<Zelda> {
 
   play() {
 
-    zeldaBass1.forEach((element) { addPlan(triangle, element); });
-    zeldaBass2.forEach((element) { addPlan(noiseGain, element); });
-    zeldaSynth1.forEach((element) { addPlan(pulse, element); });
-    zeldaSynth2.forEach((element) { addPlan(square, element); });
+    for (var element in zeldaBass1) { addPlan(triangle, element); }
+    for (var element in zeldaBass2) { addPlan(noiseGain, element); }
+    for (var element in zeldaSynth1) { addPlan(pulse, element); }
+    for (var element in zeldaSynth2) { addPlan(square, element); }
 
     noiseGain.gain.setValue(0);
     noiseGain.gain.resetSmoothedValue();
@@ -166,23 +168,23 @@ class _ZeldaState extends State<Zelda> {
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: 100,
             child: DrawTimeDomain(analyser1),
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: DrawTimeDomain(analyser2),
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: DrawTimeDomain(analyser3),
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: DrawTimeDomain(analyser4),
           ),
-          Container(
+          SizedBox(
             height: 100,
             child: DrawTimeDomain(analyser5),
           ),
@@ -226,10 +228,10 @@ void play() {
   pulse.connect(ctx.device);
   square.connect(ctx.device);
 
-  zeldaBass1.forEach((element) { addPlan(triangle, element); });
-  zeldaBass2.forEach((element) { addPlan(noiseGain, element); });
-  zeldaSynth1.forEach((element) { addPlan(pulse, element); });
-  zeldaSynth2.forEach((element) { addPlan(square, element); });
+  for (var element in zeldaBass1) { addPlan(triangle, element); }
+  for (var element in zeldaBass2) { addPlan(noiseGain, element); }
+  for (var element in zeldaSynth1) { addPlan(pulse, element); }
+  for (var element in zeldaSynth2) { addPlan(square, element); }
 
   noiseGain.gain.setValue(0);
   noiseGain.gain.resetSmoothedValue();

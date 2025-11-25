@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:ffi';
 
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 
 class AudioChannel {
@@ -44,7 +44,7 @@ class ChannelBuffer extends IterableBase<double> {
 
 }
 
-class _ChannelBufferIterator extends Iterator<double> {
+class _ChannelBufferIterator implements Iterator<double> {
   final Pointer ptr;
   final int size;
   _ChannelBufferIterator(this.ptr, this.size);

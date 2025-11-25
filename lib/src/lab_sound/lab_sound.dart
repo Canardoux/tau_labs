@@ -7,9 +7,9 @@ import 'package:path/path.dart' as p;
 
 import 'dart:collection';
 import 'package:ffi/ffi.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
-import '../generated_bindings.dart';
+import '../../tau_labs_bindings_generated.dart';
 import '../extensions/ffi_string.dart';
 import 'dart:async';
 import 'dart:isolate';
@@ -48,13 +48,13 @@ final DynamicLibrary labSoundLib = getLabSoundLib();
 
 getLabSoundLib() {
   if(Platform.isAndroid)
-    return DynamicLibrary.open("libLabSoundBridge.so");
+    return DynamicLibrary.open("libTauBridge.so");
 
   if(Platform.isLinux)
-    return DynamicLibrary.open("libLabSoundBridge.so");
+    return DynamicLibrary.open("libTauBridge.so");
   
   if(Platform.isWindows)
-    return DynamicLibrary.open("LabSoundBridge.dll");
+    return DynamicLibrary.open("TauBridge.dll");
 
   return DynamicLibrary.process();
 }
@@ -157,7 +157,7 @@ class AudioDeviceInfoAndroid extends AudioDeviceInfo {
   String toString() => "AndroidAudioDevice[$index]: $productName - $address $androidType";
 }
 
-class LabSound extends LabSoundBind {
+class LabSound extends TauLabsBindings {
   static MethodChannel? androidAudioManagerChannel;
   static EventChannel? androidEventChannel;
 
@@ -200,17 +200,18 @@ class LabSound extends LabSoundBind {
       final device = data.audioDeviceList.elementAt(i).ref;
       list.add(AudioDeviceInfo(
         index: device.index,
-        identifier: device.identifier.toStr(length: device.identifier_len),
+        identifier: (device.identifier as Pointer<Utf8>).toStr(length: device.identifier_len),
         numInputChannels: device.num_input_channels,
         numOutputChannels: device.num_output_channels,
         nominalSampleRate: device.nominal_samplerate,
         isDefaultInput: device.is_default_input > 0,
         isDefaultOutput: device.is_default_output > 0,
-        supportedSampleRates: device.supported_samplerates.toList(),
+        // LARPOUX supportedSampleRates: device.supported_samplerates.toList(),
       ));
     }
     return list;
   }
+  
 
   AudioDeviceIndex getDefaultOutputAudioDeviceIndex() =>
       labSound_GetDefaultOutputAudioDeviceIndex();

@@ -3,10 +3,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 import 'package:path_provider/path_provider.dart';
 
 class WaveFormPage extends StatefulWidget {
+  const WaveFormPage({super.key});
+
   @override
   State<WaveFormPage> createState() => _WaveFormPageState();
 }
@@ -20,9 +22,9 @@ class _WaveFormPageState extends State<WaveFormPage> {
 
   Future<String> loadAsset(String path) async {
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/' + path);
+    final file = File('${tempDir.path}/$path');
     await file.writeAsBytes(
-        (await rootBundle.load('assets/' + path)).buffer.asUint8List());
+        (await rootBundle.load('assets/$path')).buffer.asUint8List());
     return file.path;
   }
 
@@ -49,8 +51,8 @@ class _WaveFormPageState extends State<WaveFormPage> {
       wave.add(maxValue);
     }
      setState(() {
-       this.waveData = wave;
-       this.time = DateTime.now().difference(startTime);
+       waveData = wave;
+       time = DateTime.now().difference(startTime);
      });
   }
 
@@ -68,7 +70,7 @@ class _WaveFormPageState extends State<WaveFormPage> {
       body: Column(
         children: [
           if(musicBus == null)Text("loading data"),
-          Container(
+          SizedBox(
             height: 200,
             child: Row(
               children: [

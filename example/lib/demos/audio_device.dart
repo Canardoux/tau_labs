@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 class AudioDeviceList extends StatelessWidget {
+  const AudioDeviceList({super.key});
+
   @override
   Widget build(BuildContext context) {
     final deviceList = Lab.makeAudioDeviceList();

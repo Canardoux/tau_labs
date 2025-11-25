@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 import '../draw_frequency.dart';
 import '../draw_time_domain.dart';
 
 class Dial extends StatefulWidget {
+  const Dial({super.key});
+
   @override
   _DialState createState() => _DialState();
 }
@@ -85,20 +86,20 @@ class _DialState extends State<Dial> {
     int y = 0;
 
     List<Widget> buttonWidgets = [];
-    buttons.forEach((element) {
+    for (var element in buttons) {
       List<Widget> buttonLine = [];
       int x = 0;
-      element.forEach((name) {
+      for (var name in element) {
         buttonLine.add(button(name, x, y));
         x++;
-      });
+      }
       buttonWidgets.add(
         Row(
           children: buttonLine,
         )
       );
       y++;
-    });
+    }
 
 
     return Scaffold(
@@ -106,8 +107,8 @@ class _DialState extends State<Dial> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(height: 50, child: DrawTimeDomain(analyserNode)),
-          Container(height: 200, child: DrawFrequency(analyserNode)),
+          SizedBox(height: 50, child: DrawTimeDomain(analyserNode)),
+          SizedBox(height: 200, child: DrawFrequency(analyserNode)),
           ...buttonWidgets,
         ],
       ),

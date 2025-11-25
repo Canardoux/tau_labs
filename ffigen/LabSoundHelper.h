@@ -1,4 +1,4 @@
-#include "../bridge/struct.h"
+#include "struct.h"
 #include "stdint.h"
 #include "string.h"
 #include <stdbool.h>
@@ -20,7 +20,7 @@ typedef struct AudioDeviceIndex
     int valid;
 } AudioDeviceIndex;
 
-AudioDeviceInfoList labSound_MakeAudioDeviceList();
+struct AudioDeviceInfoList labSound_MakeAudioDeviceList();
 
 AudioDeviceIndex labSound_GetDefaultOutputAudioDeviceIndex();
 AudioDeviceIndex labSound_GetDefaultInputAudioDeviceIndex();

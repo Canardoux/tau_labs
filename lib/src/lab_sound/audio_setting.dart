@@ -1,9 +1,11 @@
 
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 
 import 'audio_context.dart';
 import 'lab_sound.dart';
 import '../extensions/ffi_string.dart';
+import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 
 enum AudioSettingType {
   None,
@@ -20,8 +22,8 @@ abstract class AudioSetting<T> {
   final int nodeId;
 
   AudioSetting(this.ctx, this.nodeId, this.settingId);
-  String get name => LabSound().AudioSetting_name(nodeId, settingId).toStr();
-  String get shortName => LabSound().AudioSetting_shortName(nodeId, settingId).toStr();
+  String get name => (LabSound().AudioSetting_name(nodeId, settingId)as Pointer<Int8> ).toStr();
+  String get shortName => (LabSound().AudioSetting_shortName(nodeId, settingId)as Pointer<Int8> ).toStr();
 
   AudioSettingType get type => AudioSettingType.values[LabSound().AudioSetting_type(nodeId, settingId)];
 

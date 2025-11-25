@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lab_sound_flutter/lab_sound_flutter.dart';
+import 'package:tau_labs/tau_labs.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../draw_frequency.dart';
-import '../draw_time_domain.dart';
 
 class TestPage extends StatefulWidget {
+  const TestPage({super.key});
+
   @override
   _TestPageState createState() => _TestPageState();
 }
@@ -36,20 +35,20 @@ class _TestPageState extends State<TestPage> {
 
   Future<String> loadAsset(String path) async {
     final tempDir = await getTemporaryDirectory();
-    final file = File(tempDir.path + '/' + path);
+    final file = File('${tempDir.path}/$path');
     await file.writeAsBytes(
-        (await rootBundle.load('assets/' + path)).buffer.asUint8List());
+        (await rootBundle.load('assets/$path')).buffer.asUint8List());
     return file.path;
   }
 
   Future initPath() async {
-    this.stereoMusicClipPath = await loadAsset('stereo-music-clip.wav');
-    this.music1Path = await loadAsset('music1.mp3');
-    this.music2Path = await loadAsset('music2.mp3');
+    stereoMusicClipPath = await loadAsset('stereo-music-clip.wav');
+    music1Path = await loadAsset('music1.mp3');
+    music2Path = await loadAsset('music2.mp3');
   }
 
   initPlayer() async {
-    audioBus = await AudioBus.fromFile(this.stereoMusicClipPath);
+    audioBus = await AudioBus.fromFile(stereoMusicClipPath);
     audioNode = AudioSampleNode(audioContext, resource: audioBus);
     // analyserNode = AnalyserNode(audioContext, fftSize: 2080);
     // gain = GainNode(audioContext);
